@@ -3,13 +3,14 @@ const {DefinePlugin} = require('webpack');
 const {VueLoaderPlugin} = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+require('dotenv').config();
 
 const envDefaults = {
-    prod: false,
+    MODE: 'production',
 };
 
 module.exports = (env = envDefaults) => ({
-    mode: env.prod === true ? 'production' : 'development',
+    mode: env.MODE === 'production' ? 'production' : 'development',
     devtool: false,
     entry: path.resolve(__dirname, './src/main.ts'),
 
@@ -68,11 +69,11 @@ module.exports = (env = envDefaults) => ({
 
         new DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify(env.prod === true ? 'production' : 'development'),
+                NODE_ENV: JSON.stringify(env.prod === 'production' ? 'production' : 'development'),
             },
 
             __VUE_OPTIONS_API__: JSON.stringify(true),
-            __VUE_PROD_DEVTOOLS__: JSON.stringify(env.prod !== false),
+            __VUE_PROD_DEVTOOLS__: JSON.stringify(env.prod !== 'production'),
         }),
     ],
 
