@@ -15,8 +15,8 @@ module.exports = (env = envDefaults) => ({
     entry: path.resolve(__dirname, './src/main.ts'),
 
     output: {
-        path: path.resolve(__dirname, './dist'),
-        publicPath: '/dist/',
+        path: path.resolve(__dirname, './static'),
+        publicPath: '/static/',
     },
 
     resolve: {
@@ -68,20 +68,11 @@ module.exports = (env = envDefaults) => ({
         }),
 
         new DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify(env.prod === 'production' ? 'production' : 'development'),
+            'process.env':{
+                'DOMAIN': JSON.stringify(process.env.DOMAIN)
             },
-
             __VUE_OPTIONS_API__: JSON.stringify(true),
-            __VUE_PROD_DEVTOOLS__: JSON.stringify(env.prod !== 'production'),
+            __VUE_PROD_DEVTOOLS__: JSON.stringify(false)
         }),
     ],
-
-    devServer: {
-        contentBase: __dirname,
-        hot: true,
-        inline: true,
-        overlay: true,
-        stats: 'minimal',
-    },
 });

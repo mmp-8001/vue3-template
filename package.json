@@ -1,10 +1,11 @@
 {
-  "name": "vue-3-ts-demo",
+  "name": "vue3-application",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "webpack --env.prod"
+    "build": "webpack --hide-modules",
+    "watch": "webpack --watch --hide-modules"
+
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -33,7 +34,6 @@
     "vue-loader": "16.0.0-beta.4",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.44.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-cli": "^3.3.12"
   }
 }
