@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "noLib": false,
+    "sourceMap": false,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "esnext",
+
+    "paths": {
+      "@c/*": ["./src/components/*"],
+      "@r/*": ["./src/routes/*"]
+    }
+  },
+
+  "exclude": [
+    "./node_modules"
+  ],
+
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.vue"
+  ]
+}
