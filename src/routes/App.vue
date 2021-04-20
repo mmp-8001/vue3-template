@@ -26,15 +26,11 @@
             let countDown = () => counter.value--;
             let isCounterValid = computed(() => counter.value <= 10 && counter.value > 0);
 
-            interface Msg {
-                msg: String
-            }
-
-            let messages = ref(new Array<Msg>());
+            let messages = ref(new Array<string>());
             onMounted(() => {
                 axios.get('http://127.0.0.1:5000/api/greeting/ali').then(function (response) {
                     if (response.data.ok === true) {
-                        response.data.data.forEach((item) => messages.value.push(item));
+                        (<Array<string>> response.data.data).forEach((item) => messages.value.push(item));
                     } else {
                         console.log("Failed 1");
                     }
