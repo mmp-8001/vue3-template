@@ -5,9 +5,9 @@
   "scripts": {
     "build": "webpack --hide-modules",
     "watch": "webpack --watch --hide-modules"
-
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "vue": "^3.0.11"
   },

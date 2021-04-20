@@ -27,7 +27,8 @@ def index(_=''):
 
 @app.route('/api/greeting/<string:name>', methods=['GET'])
 def get_companies(name):
-    return jsonify(ok({"name": name}))
+    messages = [f'Hi {name}', f'Hello {name}', f'{name} is here!']
+    return jsonify(ok(messages))
 
 
 if __name__ == '__main__':
