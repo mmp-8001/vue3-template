@@ -1,37 +1,40 @@
 {
-  "compilerOptions": {
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "declaration": false,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noLib": false,
-    "sourceMap": false,
-    "strict": true,
-    "alwaysStrict": true,
-    "noImplicitThis": true,
-    "strictFunctionTypes": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "strictPropertyInitialization": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "esnext",
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "declaration": false,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "noLib": false,
+        "sourceMap": false,
+        "strict": true,
+        "alwaysStrict": true,
+        "noImplicitThis": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "noImplicitAny": true,
+        "strictPropertyInitialization": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "target": "esnext",
 
-    "paths": {
-      "@c/*": ["./src/components/*"],
-      "@r/*": ["./src/routes/*"]
-    }
-  },
+        "paths": {
+            "@api": ["./src/api_routes.ts"],
+            "@lib/*": ["./src/libs/*"],
+            "@model/*": ["./src/models/*"],
+            "@c/*": ["./src/components/*"],
+            "@r/*": ["./src/routes/*"]
+        }
+    },
 
-  "exclude": [
-    "./node_modules"
-  ],
+    "exclude": [
+        "./node_modules"
+    ],
 
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.vue"
-  ]
+    "include": [
+        "./src/**/*.ts",
+        "./src/**/*.vue"
+    ]
 }

@@ -25,10 +25,14 @@ def index(_=''):
     return render_template('index.html', js=urljoin(os.getenv('DOMAIN'), '/static/main.js'))
 
 
-@app.route('/api/greeting/<string:name>', methods=['GET'])
-def get_companies(name):
-    messages = [f'Hi {name}', f'Hello {name}', f'{name} is here!']
-    return jsonify(ok(messages))
+@app.route('/api/user/<string:username>', methods=['GET'])
+def get_companies(username):
+    user = {
+        'id': 17,
+        'firstName': username,
+        'lastName': f"{username}'s family"
+    }
+    return jsonify(ok(user))
 
 
 if __name__ == '__main__':

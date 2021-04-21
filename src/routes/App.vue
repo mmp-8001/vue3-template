@@ -10,42 +10,58 @@
         <button @click="countDown()">DOWN !</button>
     </div>
     <br>
-    <p>
-        <span v-for="msg in messages">{{msg}}<br></span>
+    <br>
+    <h3>User:</h3>
+    <p style="padding-left: 10px">
+        First Name: {{user.firstName}}<br>
+        Last Name: {{user.lastName}}<br>
     </p>
 </template>
 
+
+
 <script lang="ts">
     import { defineComponent, ref, computed, onMounted } from 'vue';
-    import axios from 'axios';
+    import { User, UserEmpty } from '@model/User';
+    import { httpGet } from "@lib/api";
+    import { GET_USER } from "@api";
 
     export default defineComponent({
         setup() {
+            /*********************************************************
+             * Counter
+             *********************************************************/
             let counter = ref(0);
             let countUp = () => counter.value++;
             let countDown = () => counter.value--;
             let isCounterValid = computed(() => counter.value <= 10 && counter.value > 0);
 
-            let messages = ref(new Array<string>());
+
+            /*********************************************************
+             * User
+             *********************************************************/
+            let user = ref(UserEmpty());
             onMounted(() => {
-                axios.get('http://127.0.0.1:5000/api/greeting/ali').then(function (response) {
-                    if (response.data.ok === true) {
-                        (<Array<string>> response.data.data).forEach((item) => messages.value.push(item));
-                    } else {
-                        console.log("Failed 1");
-                    }
-                }).catch(function (error) {
-                    console.log("Failed 2");
-                    console.log(error);
+                httpGet(GET_USER('ali'), (data) => {
+                    user.value = data;
+                }, () => {
+                    // handle error
                 });
             });
 
+
+            /*********************************************************
+             * Return data
+             *********************************************************/
             return {
-                counter, countUp, countDown, isCounterValid, messages
+                counter, countUp, countDown, isCounterValid,
+                user
             }
         }
     });
 </script>
+
+
 
 <style lang="scss" scoped>
     .validation {
