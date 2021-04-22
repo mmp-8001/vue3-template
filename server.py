@@ -7,11 +7,11 @@ load_dotenv()
 app = Flask(__name__, static_url_path='')
 
 def ok(data):
-    return {"ok": True, "data": data}
+    return {"ok": True, "data": data, "code": 200}
 
 
-def err(error=[]):
-    return {"ok": False, "err":error}
+def err(error=[], code=404):
+    return {"ok": False, "err":error, "code": code}
 
 
 @app.route('/static/<path:path>', methods=['GET'])
@@ -27,6 +27,8 @@ def index(_=''):
 
 @app.route('/api/user/<string:username>', methods=['GET'])
 def get_companies(username):
+    if not (username in ['ali', 'sara']):
+        return jsonify(err())
     user = {
         'id': 17,
         'firstName': username,

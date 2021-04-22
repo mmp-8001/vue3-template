@@ -7,17 +7,18 @@ function endpointUrl(endpoint: string): string {
 export function httpGet(
     endpoint: string,
     okCallback: (data: any) => void,
-    errCallback: () => void
+    errCallback: (code: number) => void
 ) {
     axios.get(endpointUrl(endpoint)).then(function (response) {
         if (response.data.ok === true) {
             okCallback(response.data.data);
         } else {
             console.log(`Get Request Failed (Invalid Input): ${endpoint}`);
+            errCallback(response.data.code);
         }
     }).catch(function (error) {
         console.log(`Get Request Failed (Server Error): ${endpoint} -> ${error}`);
-        errCallback();
+        errCallback(500);
     });
 }
 
@@ -25,7 +26,7 @@ export function httpPost(
     endpoint: string,
     data: object,
     okCallback: (data: any) => void,
-    errCallback: () => void,
+    errCallback: (code: number) => void,
     hasFile: boolean = false
 ) {
     let headers = hasFile ? {'Content-Type': 'multipart/form-data'} : {};
@@ -40,9 +41,10 @@ export function httpPost(
             okCallback(response.data.data);
         } else {
             console.log(`Post Request Failed (Invalid Input): ${endpoint}`);
+            errCallback(response.data.code);
         }
     }).catch(function (error) {
         console.log(`Post Request Failed (Server Error): ${endpoint} -> ${error}`);
-        errCallback();
+        errCallback(500);
     });
 }

@@ -1,5 +1,12 @@
 import './styles/main.scss';
-import { createApp } from 'vue';
-import App from '@r/App.vue';
+import { createApp, ref } from 'vue';
+import Main from './Main.vue';
+import router from './routes';
 
-createApp(App).mount('#app');
+let locale = ref('en'); // Default app locale
+
+const app = createApp(Main);
+
+app.use(router);
+app.provide('locale', locale);
+app.mount('#app');

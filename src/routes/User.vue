@@ -1,16 +1,4 @@
 <template>
-    <p>
-        Counter value: {{ counter }}<br>
-        <span class="validation" :class="{invalid: !isCounterValid}">
-            <span v-if="!this.isCounterValid">in</span>valid value!
-        </span>
-    </p>
-    <div>
-        <button @click="countUp()">UP !</button>
-        <button @click="countDown()">DOWN !</button>
-    </div>
-    <br>
-    <br>
     <h3>User:</h3>
     <p style="padding-left: 10px">
         First Name: {{user.firstName}}<br>
@@ -21,31 +9,30 @@
 
 
 <script lang="ts">
-    import { defineComponent, ref, computed, onMounted } from 'vue';
+    import { defineComponent, ref, onMounted } from 'vue';
+    import { useRoute, useRouter } from 'vue-router'
     import { User, UserEmpty } from '@model/User';
     import { httpGet } from "@lib/api";
     import { GET_USER } from "@api";
 
     export default defineComponent({
         setup() {
-            /*********************************************************
-             * Counter
-             *********************************************************/
-            let counter = ref(0);
-            let countUp = () => counter.value++;
-            let countDown = () => counter.value--;
-            let isCounterValid = computed(() => counter.value <= 10 && counter.value > 0);
-
+            const route = useRoute();
+            const router = useRouter();
 
             /*********************************************************
              * User
              *********************************************************/
             let user = ref(UserEmpty());
             onMounted(() => {
-                httpGet(GET_USER('ali'), (data) => {
+                httpGet(GET_USER(<string> route.params.username), (data) => {
                     user.value = data;
-                }, () => {
-                    // handle error
+                }, (code: number) => {
+                    if (code === 404) {
+                        router.push('/404');
+                    } else {
+                        // TODO: handle error
+                    }
                 });
             });
 
@@ -54,7 +41,6 @@
              * Return data
              *********************************************************/
             return {
-                counter, countUp, countDown, isCounterValid,
                 user
             }
         }
