@@ -1,0 +1,17 @@
+{
+  "en": {
+    "html_lang": "en",
+    "direction": "ltr",
+    "Title": "My Site"
+  },
+  "fa": {
+    "html_lang": "fa",
+    "direction": "rtl",
+    "Title": "سایت من"
+  },
+  "ar": {
+    "html_lang": "ar",
+    "direction": "rtl",
+    "Title": "شسیبسیبش"
+  }
+}

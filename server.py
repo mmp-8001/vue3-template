@@ -22,7 +22,7 @@ def file(path):
 @app.errorhandler(404)
 @app.route('/', methods=['GET'])
 def index(_=''):
-    return render_template('index.html', js=urljoin(os.getenv('DOMAIN'), '/static/main.js'))
+    return render_template('index.html', js=urljoin(os.getenv('DOMAIN'), '/static/main.ar.js'))
 
 
 @app.route('/api/user/<string:username>', methods=['GET'])

@@ -1,4 +1,5 @@
 <template>
+    <div>{{ TRL("Title") }}</div>
     <p>
         Counter value: {{ counter }}<br>
         <span class="validation" :class="{invalid: !isCounterValid}">
@@ -16,6 +17,7 @@
 
 <script lang="ts">
     import { defineComponent, ref, computed } from 'vue';
+    import {TRL} from "@lib/language";
 
     export default defineComponent({
         setup() {
@@ -32,19 +34,20 @@
              * Return data
              *********************************************************/
             return {
-                counter, countUp, countDown, isCounterValid,
+                counter, countUp, countDown, isCounterValid, TRL
             }
         }
     });
 </script>
 
 
-
 <style lang="scss" scoped>
-    .validation {
-        color: green;
-        &.invalid {
-            color: red;
-        }
-    }
+
+.validation {
+  color: #{if($is_rtl, "yellow", "purple")};
+
+  &.invalid {
+    color: red;
+  }
+}
 </style>
